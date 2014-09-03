@@ -31,10 +31,15 @@ public class Cube : MonoBehaviour {
 		//float movex = 0;
 
 
-		if (!Input.anyKey) {
+
+		if (Input.touchCount>0) {
+			Debug.Log (Input.touchCount.ToString());
+			}
+
+		//没有按键或触摸
+		if (!Input.anyKey && Input.touchCount==0) {
 
 	
-
 			if (location==1 ) {
 				gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position,new Vector3(-0.55f,-8f,0),1);
 			}
@@ -55,25 +60,36 @@ public class Cube : MonoBehaviour {
 
 			
 		}
-		
-		if (Input.GetKey (KeyCode.A) ) {
-			
-			if (location==1 ) {
-				gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position,new Vector3(-6.01f,gameObject.transform.position.y,0),1);
+		if (Input.touchCount>0) {
+
+			Vector2 realWorldPos = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position);
+			Debug.Log (realWorldPos.x.ToString()+"-------------"+Input.GetTouch(0).position.x.ToString());
+
+			if (Input.touchCount==1) {
+
+				if (realWorldPos.x<-5.0f) {
+					MoveL ();
+				}
+				else {
+					MoveR ();
+				}
+
 			}
-			if (location==2) {
-				gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position,new Vector3(-4.96f,gameObject.transform.position.y,0),1);
+			else {
+				MoveLR ();
 			}
-			
+
+		}
+
+		//A或者触摸左边
+		if (Input.GetKey (KeyCode.A)) {
+
+			MoveL ();
+						
 		}
 		if (Input.GetKey (KeyCode.D)) {
 			
-			if (location==1 ) {
-				gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position,new Vector3(5f,gameObject.transform.position.y,0),1);
-			}
-			if (location==2) {
-				gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position,new Vector3(6.05f,gameObject.transform.position.y,0),1);
-			}
+			MoveR();
 			
 		}
 
@@ -81,15 +97,10 @@ public class Cube : MonoBehaviour {
 
 				//Debug.Log("D and A");
 
-				if (location==1 ) {
-					gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position,new Vector3(-6.01f,gameObject.transform.position.y,0),1);
-				}
-				if (location==2) {
-					gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position,new Vector3(6.05f,gameObject.transform.position.y,0),1);
-				}
+			MoveLR ();
 
 
-			}
+		}
 
 	
 
@@ -109,6 +120,36 @@ public class Cube : MonoBehaviour {
 
 	}
 
+	void MoveL()
+	{
+		if (location==1 ) {
+			gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position,new Vector3(-6.01f,gameObject.transform.position.y,0),1);
+		}
+		if (location==2) {
+			gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position,new Vector3(-4.96f,gameObject.transform.position.y,0),1);
+		}
+
+	}
+
+	void MoveR()
+	{
+		if (location==1 ) {
+			gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position,new Vector3(5f,gameObject.transform.position.y,0),1);
+		}
+		if (location==2) {
+			gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position,new Vector3(6.05f,gameObject.transform.position.y,0),1);
+		}
+	}
+
+	void MoveLR()
+	{
+		if (location==1 ) {
+			gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position,new Vector3(-6.01f,gameObject.transform.position.y,0),1);
+		}
+		if (location==2) {
+			gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position,new Vector3(6.05f,gameObject.transform.position.y,0),1);
+		}
+	}
 
 	void OnCollisionEnter(Collision collision)
 	{
