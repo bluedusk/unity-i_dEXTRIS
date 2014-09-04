@@ -35,6 +35,14 @@ public class GameManager : MonoBehaviour {
 		txt_score.text = "Score: " + m_score;
 
 	}
+	public void SetScore(int score)
+	{
+		
+		m_score += score;
+		
+		txt_score.text = "Score: " + m_score;
+		
+	}
 	public void GameOver()
 	{
 	

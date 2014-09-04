@@ -67,7 +67,7 @@ public class Cube : MonoBehaviour {
 
 			if (Input.touchCount==1) {
 
-				if (realWorldPos.x<-5.0f) {
+				if (realWorldPos.x<0) {
 					MoveL ();
 				}
 				else {
