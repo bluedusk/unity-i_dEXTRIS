@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour {
 	int life = 1;
 
 	public Transform _btnGroup;
+	public Transform _imgGameOver;
 
 	Cube player;
 	GUIText txt_score;
@@ -22,6 +23,7 @@ public class GameManager : MonoBehaviour {
 		//获得并激活按钮,获得没用啊，还是得在inspector里面设定；
 		//_btnGroup = GameObject.Find ("btnGroup").transform;
 		_btnGroup.gameObject.SetActive (false);
+		_imgGameOver.gameObject.SetActive (false);
 
 		instance = this;
 
@@ -104,6 +106,7 @@ public class GameManager : MonoBehaviour {
 	
 		Debug.Log ("Game Over");
 		_btnGroup.gameObject.SetActive (true);
+		_imgGameOver.gameObject.SetActive (true);
 
 		Time.timeScale = 0;
 
@@ -115,11 +118,11 @@ public class GameManager : MonoBehaviour {
 	{
 		if (life==0) {
 
-			GUI.skin.label.alignment = TextAnchor.MiddleCenter;
-			GUI.skin.label.fontSize = 40;
-			
-			
-			GUI.Label (new Rect (0, 0, Screen.width, Screen.height), "Game Over!");
+//			GUI.skin.label.alignment = TextAnchor.MiddleCenter;
+//			GUI.skin.label.fontSize = 40;
+//			
+//			
+//			GUI.Label (new Rect (0, 0, Screen.width, Screen.height), "Game Over!");
 
 //			if (GUI.Button(new Rect (Screen.width*0.5f-75, Screen.height*0.7f-45,150,40), "Try Again")) {
 //				GameStart();

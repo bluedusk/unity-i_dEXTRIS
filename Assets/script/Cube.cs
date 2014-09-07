@@ -10,6 +10,10 @@ public class Cube : MonoBehaviour {
 	GameObject[] m_Players;
 
 
+	//add audio for coin
+	public AudioClip _gameOverClip;
+	protected AudioSource _audio;
+
 	// Use this for initialization
 	void Start () {
 
@@ -154,7 +158,9 @@ public class Cube : MonoBehaviour {
 	void OnCollisionEnter(Collision collision)
 	{
 		Debug.Log (collision.collider.name);
-		
+
+		AudioSource.PlayClipAtPoint(_gameOverClip,new Vector3());
+
 		if (collision.collider.tag == "Enemy") {
 
 			foreach (GameObject obj in m_Players) {

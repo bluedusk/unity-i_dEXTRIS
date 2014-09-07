@@ -5,11 +5,18 @@ public class Coin : MonoBehaviour {
 
 
 	public float m_speed = 1f;
+
+	//add audio for coin
+	public AudioClip _coinClip;
+	protected AudioSource _audio;
+
 	
 	int scored = 0;
 	public int m_scroe = 5;
 	// Use this for initialization
 	void Start () {
+
+		_audio = this.audio;
 	
 	}
 	
@@ -56,7 +63,11 @@ public class Coin : MonoBehaviour {
 		if (other.tag=="Player") {
 
 			GameManager.instance.SetScore(m_scroe);
-			//吃掉金币
+
+			//_audio.PlayOneShot(_coinClip);
+
+			AudioSource.PlayClipAtPoint(_coinClip,this.transform.position);
+
 			Destroy (this.gameObject);
 
 		}
