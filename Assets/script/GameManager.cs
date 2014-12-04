@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour {
 
 	Cube player;
 	GUIText txt_score;
+	GUIText txt_hscore;
 	// Use this for initialization
 	void Start () {
 
