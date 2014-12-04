@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour {
 	public static GameManager instance = null;
 
 	public static int m_score = 0;
+	public static int m_hscore = 0;
+
 
 	private int LayerInt;
 
@@ -33,6 +35,10 @@ public class GameManager : MonoBehaviour {
 		//获取UI层的Layer Id
 		LayerInt = LayerMask.NameToLayer ("UI");
 		txt_score = this.transform.FindChild("txt-score").GetComponent<GUIText>();
+		txt_hscore = this.transform.FindChild("txt-hscore").GetComponent<GUIText>();
+		
+		m_score = 0;
+		txt_hscore.text = "Best: " + m_hscore;
 
 
 	
@@ -101,6 +107,16 @@ public class GameManager : MonoBehaviour {
 		
 		txt_score.text = "Score: " + m_score;
 		
+	}
+	public void SetHScore()
+	{
+		if (m_score>m_hscore) {
+
+			m_hscore = m_score;
+		}
+
+		txt_hscore.text = "Best: " + m_hscore;
+	
 	}
 	public void GameOver()
 	{

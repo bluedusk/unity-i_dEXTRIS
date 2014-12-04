@@ -155,20 +155,21 @@ public class Cube : MonoBehaviour {
 		}
 	}
 
+	//When collision occurs
 	void OnCollisionEnter(Collision collision)
 	{
 		Debug.Log (collision.collider.name);
 
 		AudioSource.PlayClipAtPoint(_gameOverClip,new Vector3());
 
-		if (collision.collider.tag == "Enemy") {
+		if (collision.collider.tag == "Enemy") {//if touch enemy, player die;
 
-			foreach (GameObject obj in m_Players) {
+			foreach (GameObject obj in m_Players) {//deal with two players
 
 				Destroy (obj);
 
 			}
-
+			GameManager.instance.SetHScore();
 			GameManager.instance.GameOver();
 
 		}
